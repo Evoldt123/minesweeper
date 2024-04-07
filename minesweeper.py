@@ -4,7 +4,7 @@ import random
 from pygame.locals import QUIT
 
 pygame.init()
-screen_size = [800, 1000]
+screen_size = [600, 600]
 screen_w = screen_size[0]
 screen_h = screen_size[1]
 screen = pygame.display.set_mode(screen_size)
@@ -83,8 +83,8 @@ cell_width = screen_w / grid_w
 screen.fill((0, 100, 0))
 
 # Number Font
-font = pygame.font.SysFont('callisto', 50)
-bigger_font = pygame.font.SysFont('callisto', 80)
+font = pygame.font.SysFont('callisto', 30)
+bigger_font = pygame.font.SysFont('callisto', 60)
 
 # Functions ----------------------------------------------------------------------------------
 
@@ -121,8 +121,8 @@ def draw_game():
 
 # Draws container at the bottom of the screen
 def bottom_container():
-    pygame.draw.rect(screen, BLACK, [0, 800, screen_w, 200])
-    pygame.draw.rect(screen, (34, 23, 45), [10, 810, screen_w-20, 200-20])
+    pygame.draw.rect(screen, BLACK, [0, 600, screen_w, 200])
+    pygame.draw.rect(screen, (34, 23, 45), [10, 610, screen_w-20, 200-20])
 
 # On bomb detonate
 loss_coords = (0, 0)
@@ -151,7 +151,7 @@ def lose():
     # Time Text
     bottom_container()
     time_text = bigger_font.render(f'You lost in: {(round(time_end - time_init) // 1000)} Seconds', True, RED)
-    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 800))
+    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 600))
     screen.blit(time_text, time_text_rect)
 
     pygame.display.update()
@@ -194,7 +194,7 @@ def pregame():
             pygame.quit()
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            screen = pygame.display.set_mode([800, 1000])
+            screen = pygame.display.set_mode([600, 800])
             game_state = 1
             
 
@@ -309,7 +309,7 @@ def game():
     curr_time = (round(pygame.time.get_ticks() - time_init) // 1000)
     curr_mines = num_mines - sum([x.count(True) for x in flagged])
     time_text = bigger_font.render(f"{curr_time} Second{'s' if curr_time != 1 else ''} | {curr_mines} Mine{'s' if curr_mines != 1 else ''}", True, WHITE)
-    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 800))
+    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 600))
     
 
     # Checks if every safe cell is revealed (win condition)
@@ -343,7 +343,7 @@ def postgame():
     bottom_container()
     # Final Messages
     time_text = bigger_font.render(f'You won in: {(round(time_end - time_init) // 1000)} Seconds', True, GREEN)
-    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 800))
+    time_text_rect = time_text.get_rect(center=(screen_w/2, 200/2 + 600))
     screen.blit(time_text, time_text_rect)
     pygame.display.update()
     
